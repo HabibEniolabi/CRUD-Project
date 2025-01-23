@@ -1,7 +1,7 @@
+"use client";
 import React, { useState } from "react";
 
 const TodoList = () => {
-
   const [formValue, setFormValue] = useState({
     address: "",
     suite: "",
@@ -11,26 +11,40 @@ const TodoList = () => {
     country: "",
     email: "",
     password: "",
-    confirmpassword: ""
-  })
+    confirmpassword: "",
+  });
 
-  const handleChange = (e: { target: { name: any; value: any; }; }) => {
-    const {name, value} = e.target;
-    setFormValue({...formValue, [name]: value});
-  }
+  const handleChange = (e: { target: { name: any; value: any } }) => {
+    const { name, value } = e.target;
+    setFormValue({ ...formValue, [name]: value });
+  };
+
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+
+    const vaidationErrors = {};
+    if (!formValue.address.trim()) {
+      vaidationErrors.address = "Address is required";
+    }
+  };
 
   return (
-    <form>
-      <div className="items-end bg-white text-black p-8 rounded-xl">
-        <h1 className="font-bold text-2xl">Address Information</h1>
-        <p className="text-sm text-gray-600">
-          Please enter your shipping address below.
-        </p>
+    <form
+      onSubmit={handleSubmit}
+      className="px-10 pb-10 md:px-5 pt-6 flex flex-col"
+    >
+      <div className="items-end bg-white text-black p-8 rounded-xl flex flex-col gap-3">
+        <div className="w-full">
+          <h1 className="font-bold text-2xl">Address Information</h1>
+          <p className="text-sm text-gray-600">
+            Please enter your shipping address below.
+          </p>
+        </div>
 
         <div className="w-full">
-          <label className="text-lg">Street Address</label>
+          <label className="text-lg font-bold">Street Address</label>
           <input
-            className="p-4 rounded w-full text-gray-500 border border-gray-500"
+            className="p-3 rounded w-full text-gray-500 border border-gray-500"
             type="text"
             onChange={handleChange}
             placeholder="123 Main Str"
@@ -39,9 +53,9 @@ const TodoList = () => {
           />
         </div>
         <div className="w-full">
-          <label className="text-lg">Email</label>
+          <label className="text-lg font-bold">Email</label>
           <input
-            className="p-4 rounded w-full text-gray-500 border border-gray-500"
+            className="p-3 rounded w-full text-gray-500 border border-gray-500"
             type="text"
             onChange={handleChange}
             placeholder="example@gmail.com"
@@ -50,9 +64,11 @@ const TodoList = () => {
           />
         </div>
         <div className="w-full">
-          <label className="text-lg">Appartment/Suite (Optional)</label>
+          <label className="text-lg font-bold">
+            Appartment/Suite (Optional)
+          </label>
           <input
-            className="p-4 rounded w-full text-gray-500 border border-gray-500"
+            className="p-3 rounded w-full text-gray-500 border border-gray-500"
             type="text"
             onChange={handleChange}
             placeholder="Apt 4B"
@@ -60,11 +76,11 @@ const TodoList = () => {
             value={formValue.suite}
           />
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-3 w-full">
           <div className="w-full">
-            <label className="text-lg">City</label>
+            <label className="text-lg font-bold">City</label>
             <input
-              className="p-4 rounded w-full text-gray-500 border border-gray-500"
+              className="p-3 rounded w-full text-gray-500 border border-gray-500"
               type="text"
               onChange={handleChange}
               placeholder="New York"
@@ -73,9 +89,9 @@ const TodoList = () => {
             />
           </div>
           <div className="w-full">
-            <label className="text-lg">State</label>
+            <label className="text-lg font-bold">State</label>
             <input
-              className="p-4 rounded w-full text-gray-500 border border-gray-500"
+              className="p-3 rounded w-full text-gray-500 border border-gray-500"
               type="text"
               onChange={handleChange}
               placeholder="NY"
@@ -84,11 +100,11 @@ const TodoList = () => {
             />
           </div>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-3 w-full">
           <div className="w-full">
-            <label className="text-lg">ZIP Code</label>
+            <label className="text-lg font-bold">ZIP Code</label>
             <input
-              className="p-4 rounded w-full text-gray-500 border border-gray-500"
+              className="p-3 rounded w-full text-gray-500 border border-gray-500"
               type="text"
               onChange={handleChange}
               placeholder="10001"
@@ -97,9 +113,9 @@ const TodoList = () => {
             />
           </div>
           <div className="w-full">
-            <label className="text-lg">Country</label>
+            <label className="text-lg font-bold">Country</label>
             <input
-              className="p-4 rounded w-full text-gray-500 border border-gray-500"
+              className="p-3 rounded w-full text-gray-500 border border-gray-500"
               type="text"
               onChange={handleChange}
               placeholder="United States"
@@ -110,9 +126,9 @@ const TodoList = () => {
         </div>
         <div className="flex gap-3">
           <div className="w-full">
-            <label className="text-lg">Room Password</label>
+            <label className="text-lg font-bold">Room Password</label>
             <input
-              className="p-4 rounded w-full text-gray-500 border border-gray-500"
+              className="p-3 rounded w-full text-gray-500 border border-gray-500"
               type="text"
               onChange={handleChange}
               placeholder="******"
@@ -121,9 +137,9 @@ const TodoList = () => {
             />
           </div>
           <div className="w-full">
-            <label className="text-lg">Confirm Password</label>
+            <label className="text-lg font-bold">Confirm Password</label>
             <input
-              className="p-4 rounded w-full text-gray-500 border border-gray-500"
+              className="p-3 rounded w-full text-gray-500 border border-gray-500"
               type="text"
               onChange={handleChange}
               placeholder="******"
@@ -132,7 +148,7 @@ const TodoList = () => {
             />
           </div>
         </div>
-        <div className="bg-blue-900 text-white cursor-pointer text-center w-full p-4">
+        <div className="bg-blue-500 border border-blue-500 rounded-md text-white cursor-pointer text-center w-full p-4">
           <h3>Save Address</h3>
         </div>
       </div>
