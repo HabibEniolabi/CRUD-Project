@@ -13,19 +13,33 @@ const TodoList = () => {
     password: "",
     confirmpassword: "",
   });
+  const [newTodo, setNewTodo] = useState([]);
 
-  const handleChange = (e: { target: { name: any; value: any } }) => {
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
   };
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
-    const vaidationErrors = {};
-    if (!formValue.address.trim()) {
-      vaidationErrors.address = "Address is required";
+    if (formValue.password !== formValue.confirmpassword) {
+      alert("password does nor match!");
+      return;
     }
+
+    setNewTodo([...newTodo, formValue]);
+    setFormValue({
+      address: "",
+      suite: "",
+      city: "",
+      state: "",
+      code: "",
+      country: "",
+      email: "",
+      password: "",
+      confirmpassword: "",
+    });
   };
 
   return (
@@ -148,9 +162,9 @@ const TodoList = () => {
             />
           </div>
         </div>
-        <div className="bg-blue-500 border border-blue-500 rounded-md text-white cursor-pointer text-center w-full p-4">
-          <h3>Save Address</h3>
-        </div>
+        <button className="bg-blue-500 border border-blue-500 rounded-md text-white cursor-pointer text-center w-full p-4">
+          Save Address
+        </button>
       </div>
     </form>
   );
