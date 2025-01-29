@@ -2,6 +2,27 @@
 import React, { useState } from "react";
 
 const TodoList = () => {
+  const initialTodos = [
+    {
+      address: "123 Main St",
+      suite: "Apt 1",
+      city: "New York",
+      state: "NY",
+      code: "10001",
+      country: "USA",
+      email: "example1@example.com",
+    },
+    {
+      address: "456 Oak Rd",
+      suite: "Suite B",
+      city: "Los Angeles",
+      state: "CA",
+      code: "90001",
+      country: "USA",
+      email: "example2@example.com",
+    },
+  ];
+
   const [formValue, setFormValue] = useState({
     address: "",
     suite: "",
@@ -13,15 +34,15 @@ const TodoList = () => {
     password: "",
     confirmPassword: "",
   });
-  const [newTodo, setNewTodo] = useState<any[]>([]);
-  const [editInput, setEditInput] = useState(null);
+  const [newTodo, setNewTodo] = useState(initialTodos);
+  const [editInput, setEditInput] = useState<number | null>(null);
 
   const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
     setFormValue({ ...formValue, [name]: value });
   };
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (formValue.password !== formValue.confirmPassword) {
@@ -32,12 +53,31 @@ const TodoList = () => {
     if (editInput !== null) {
       // Update operation
       const updatedData = [...newTodo];
-      updatedData[editInput] = formValue;
+      updatedData[editInput] = {
+        address: formValue.address,
+        suite: formValue.suite,
+        city: formValue.city,
+        state: formValue.state,
+        code: formValue.code,
+        country: formValue.country,
+        email: formValue.email,
+      };
       setNewTodo(updatedData);
       setEditInput(null);
     } else {
       // Create operation
-      setNewTodo([...newTodo, formValue]);
+      setNewTodo([
+        ...newTodo,
+        {
+          address: formValue.address,
+          suite: formValue.suite,
+          city: formValue.city,
+          state: formValue.state,
+          code: formValue.code,
+          country: formValue.country,
+          email: formValue.email,
+        },
+      ]);
     }
 
     setFormValue({
@@ -54,8 +94,13 @@ const TodoList = () => {
   };
 
   const handleEdit = (index: number) => {
-    setFormValue(newTodo[index]);
-    handleDelete(index);
+    setEditInput(index);
+    const todoToEdit = newTodo[index];
+    setFormValue({
+      ...todoToEdit,
+      password: "",
+      confirmPassword: "",
+    });
   };
 
   const handleDelete = (index: number) => {
@@ -64,35 +109,36 @@ const TodoList = () => {
   };
 
   // Check if all fields are filled
-  const isFormComplete =
-    formValue.address &&
-    formValue.email &&
-    formValue.password &&
-    formValue.password === formValue.confirmPassword &&
-    formValue.city &&
-    formValue.code &&
-    formValue.country &&
-    formValue.state &&
-    formValue.suite;
+  const isFormComplete = () => {
+    return (
+      formValue.address &&
+      formValue.email &&
+      formValue.password &&
+      formValue.password === formValue.confirmPassword &&
+      formValue.city &&
+      formValue.code &&
+      formValue.country &&
+      formValue.state &&
+      formValue.suite
+    );
+  };
 
   return (
     <div>
       <form
         onSubmit={handleSubmit}
-        className="px-10 pb-10 md:px-5 pt-6 flex flex-col"
+        className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg"
       >
-        <div className="items-end bg-white text-black p-8 rounded-xl flex flex-col gap-3">
-          <div className="w-full">
-            <h1 className="font-bold text-2xl">Address Information</h1>
-            <p className="text-sm text-gray-600">
-              Please enter your shipping address below.
-            </p>
-          </div>
+        <div className="w-full">
+          <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Address Information</h1>
+          <p className="text-sm text-gray-600">
+            Please enter your shipping address below.
+          </p>
 
           <div className="w-full">
             <label className="text-lg font-bold">Street Address</label>
             <input
-              className="p-3 rounded w-full text-gray-500 border border-gray-500"
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="text"
               onChange={handleChange}
               placeholder="123 Main Str"
@@ -104,7 +150,7 @@ const TodoList = () => {
           <div className="w-full">
             <label className="text-lg font-bold">Email</label>
             <input
-              className="p-3 rounded w-full text-gray-500 border border-gray-500"
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="text"
               onChange={handleChange}
               placeholder="example@gmail.com"
@@ -118,7 +164,7 @@ const TodoList = () => {
               Appartment/Suite (Optional)
             </label>
             <input
-              className="p-3 rounded w-full text-gray-500 border border-gray-500"
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="text"
               onChange={handleChange}
               placeholder="Apt 4B"
@@ -131,7 +177,7 @@ const TodoList = () => {
             <div className="w-full">
               <label className="text-lg font-bold">City</label>
               <input
-                className="p-3 rounded w-full text-gray-500 border border-gray-500"
+                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 onChange={handleChange}
                 placeholder="New York"
@@ -143,7 +189,7 @@ const TodoList = () => {
             <div className="w-full">
               <label className="text-lg font-bold">State</label>
               <input
-                className="p-3 rounded w-full text-gray-500 border border-gray-500"
+                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 onChange={handleChange}
                 placeholder="NY"
@@ -157,7 +203,7 @@ const TodoList = () => {
             <div className="w-full">
               <label className="text-lg font-bold">ZIP Code</label>
               <input
-                className="p-3 rounded w-full text-gray-500 border border-gray-500"
+                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 onChange={handleChange}
                 placeholder="10001"
@@ -169,7 +215,7 @@ const TodoList = () => {
             <div className="w-full">
               <label className="text-lg font-bold">Country</label>
               <input
-                className="p-3 rounded w-full text-gray-500 border border-gray-500"
+                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 onChange={handleChange}
                 placeholder="United States"
@@ -183,7 +229,7 @@ const TodoList = () => {
             <div className="w-full">
               <label className="text-lg font-bold">Room Password</label>
               <input
-                className="p-3 rounded w-full text-gray-500 border border-gray-500"
+                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 onChange={handleChange}
                 placeholder="******"
@@ -195,26 +241,60 @@ const TodoList = () => {
             <div className="w-full">
               <label className="text-lg font-bold">Confirm Password</label>
               <input
-                className="p-3 rounded w-full text-gray-500 border border-gray-500"
+                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 onChange={handleChange}
                 placeholder="******"
                 required
-                name="confirmpassword"
+                name="password"
                 value={formValue.confirmPassword}
               />
             </div>
           </div>
           <button
-            className="bg-blue-500 border border-blue-500 rounded-md text-white cursor-pointer text-center w-full p-4"
             type="submit"
-            disabled={!isFormComplete}
+            disabled={!isFormComplete()}
+            className={`w-full p-3 rounded-md text-white ${
+              isFormComplete()
+                ? "bg-blue-500 hover:bg-blue-600"
+                : "bg-gray-400 cursor-not-allowed"
+            }`}
           >
-            Save Address
+            {editInput !== null ? "Update Address" : "Submit Address"}
           </button>
         </div>
       </form>
-      <ul className="bg-white p-3 text-black"></ul>
+      {/* Todo List */}
+      <div className="mt-8">
+        <h3 className="text-xl font-semibold text-gray-700 mb-4">Todo Items</h3>
+        <ul className="space-y-4">
+          {newTodo.map((todo, index) => (
+            <li
+              key={index}
+              className="flex items-center justify-between bg-gray-100 p-4 rounded-md shadow-sm"
+            >
+              <span className="text-gray-800">
+                {todo.address}, {todo.suite}, {todo.city}, {todo.state},{" "}
+                {todo.code}, {todo.country}, {todo.email}
+              </span>
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => handleEdit(index)}
+                  className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(index)}
+                  className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                >
+                  Delete
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
