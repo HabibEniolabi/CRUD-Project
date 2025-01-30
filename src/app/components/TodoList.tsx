@@ -124,23 +124,28 @@ const TodoList = () => {
   };
 
   return (
-    <div>
+    <div className="max-w-4xl mx-auto mt-12 p-8 bg-gray-100 rounded-lg shadow-lg">
+      <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">
+        Address Information
+      </h1>
+
       <form
         onSubmit={handleSubmit}
-        className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg"
+        className="space-y-6 bg-white p-6 rounded-lg shadow-sm"
       >
+        <p className="text-xl font-semibold text-gray-700">
+          Please enter your shipping address below.
+        </p>
         <div className="w-full">
-          <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Address Information</h1>
-          <p className="text-sm text-gray-600">
-            Please enter your shipping address below.
-          </p>
-
           <div className="w-full">
             <label className="text-lg font-bold">Street Address</label>
             <input
               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="text"
-              onChange={handleChange}
+              // onChange={handleChange}
+              onChange={(e) =>
+                setFormValue({ ...formValue, address: e.target.value })
+              }
               placeholder="123 Main Str"
               required
               name="address"
@@ -152,7 +157,10 @@ const TodoList = () => {
             <input
               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="text"
-              onChange={handleChange}
+              // onChange={handleChange}
+              onChange={(e) =>
+                setFormValue({ ...formValue, address: e.target.value })
+              }
               placeholder="example@gmail.com"
               required
               name="email"
@@ -166,7 +174,10 @@ const TodoList = () => {
             <input
               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="text"
-              onChange={handleChange}
+              // onChange={handleChange}
+              onChange={(e) =>
+                setFormValue({ ...formValue, address: e.target.value })
+              }
               placeholder="Apt 4B"
               required
               name="suite"
@@ -179,7 +190,10 @@ const TodoList = () => {
               <input
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
-                onChange={handleChange}
+                // onChange={handleChange}
+                onChange={(e) =>
+                  setFormValue({ ...formValue, address: e.target.value })
+                }
                 placeholder="New York"
                 required
                 name="city"
@@ -191,7 +205,10 @@ const TodoList = () => {
               <input
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
-                onChange={handleChange}
+                // onChange={handleChange}
+                onChange={(e) =>
+                  setFormValue({ ...formValue, address: e.target.value })
+                }
                 placeholder="NY"
                 required
                 name="state"
@@ -205,7 +222,10 @@ const TodoList = () => {
               <input
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
-                onChange={handleChange}
+                // onChange={handleChange}
+                onChange={(e) =>
+                  setFormValue({ ...formValue, address: e.target.value })
+                }
                 placeholder="10001"
                 required
                 name="code"
@@ -217,7 +237,10 @@ const TodoList = () => {
               <input
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
-                onChange={handleChange}
+                // onChange={handleChange}
+                onChange={(e) =>
+                  setFormValue({ ...formValue, address: e.target.value })
+                }
                 placeholder="United States"
                 required
                 name="country"
@@ -231,7 +254,10 @@ const TodoList = () => {
               <input
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
-                onChange={handleChange}
+                // onChange={handleChange}
+                onChange={(e) =>
+                  setFormValue({ ...formValue, address: e.target.value })
+                }
                 placeholder="******"
                 required
                 name="password"
@@ -243,10 +269,13 @@ const TodoList = () => {
               <input
                 className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
-                onChange={handleChange}
+                // onChange={handleChange}
+                onChange={(e) =>
+                  setFormValue({ ...formValue, address: e.target.value })
+                }
                 placeholder="******"
                 required
-                name="password"
+                name="confirmpassword"
                 value={formValue.confirmPassword}
               />
             </div>
@@ -254,7 +283,7 @@ const TodoList = () => {
           <button
             type="submit"
             disabled={!isFormComplete()}
-            className={`w-full p-3 rounded-md text-white ${
+            className={`w-full p-3 rounded-md mt-3 text-white ${
               isFormComplete()
                 ? "bg-blue-500 hover:bg-blue-600"
                 : "bg-gray-400 cursor-not-allowed"
@@ -266,12 +295,14 @@ const TodoList = () => {
       </form>
       {/* Todo List */}
       <div className="mt-8">
-        <h3 className="text-xl font-semibold text-gray-700 mb-4">Todo Items</h3>
+        <h3 className="text-xl font-semibold text-gray-700 mb-4">
+          Address Input Fields
+        </h3>
         <ul className="space-y-4">
           {newTodo.map((todo, index) => (
             <li
               key={index}
-              className="flex items-center justify-between bg-gray-100 p-4 rounded-md shadow-sm"
+              className="flex items-center justify-between bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition"
             >
               <span className="text-gray-800">
                 {todo.address}, {todo.suite}, {todo.city}, {todo.state},{" "}
