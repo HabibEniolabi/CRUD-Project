@@ -32,20 +32,16 @@ const TodoList = () => {
     country: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    confirmpassword: "",
   });
   const [newTodo, setNewTodo] = useState(initialTodos);
   const [editInput, setEditInput] = useState<number | null>(null);
 
-  const handleChange = (e: { target: { name: any; value: any } }) => {
-    const { name, value } = e.target;
-    setFormValue({ ...formValue, [name]: value });
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (formValue.password !== formValue.confirmPassword) {
+    if (formValue.password !== formValue.confirmpassword) {
       alert("password does nor match!");
       return;
     }
@@ -89,7 +85,7 @@ const TodoList = () => {
       country: "",
       email: "",
       password: "",
-      confirmPassword: "",
+      confirmpassword: "",
     });
   };
 
@@ -99,7 +95,7 @@ const TodoList = () => {
     setFormValue({
       ...todoToEdit,
       password: "",
-      confirmPassword: "",
+      confirmpassword: "",
     });
   };
 
@@ -114,7 +110,7 @@ const TodoList = () => {
       formValue.address &&
       formValue.email &&
       formValue.password &&
-      formValue.password === formValue.confirmPassword &&
+      formValue.password === formValue.confirmpassword &&
       formValue.city &&
       formValue.code &&
       formValue.country &&
@@ -142,7 +138,9 @@ const TodoList = () => {
             <input
               className="w-full p-3 border border-gray-300 rounded-md "
               type="text"
-              onChange={handleChange}
+              onChange={(e) =>
+                setFormValue({ ...formValue, address: e.target.value })
+              }
               placeholder="123 Main Str"
               required
               name="address"
@@ -153,8 +151,10 @@ const TodoList = () => {
             <label className="text-lg font-bold">Email</label>
             <input
               className="w-full p-3 border border-gray-300 rounded-md"
-              type="text"
-              onChange={handleChange}
+              type="email"
+              onChange={(e) =>
+                setFormValue({ ...formValue, email: e.target.value })
+              }
               placeholder="example@gmail.com"
               required
               name="email"
@@ -168,7 +168,9 @@ const TodoList = () => {
             <input
               className="w-full p-3 border border-gray-300 rounded-md "
               type="text"
-              onChange={handleChange}
+              onChange={(e) =>
+                setFormValue({ ...formValue, suite: e.target.value })
+              }
               placeholder="Apt 4B"
               required
               name="suite"
@@ -181,7 +183,9 @@ const TodoList = () => {
               <input
                 className="w-full p-3 border border-gray-300 rounded-md"
                 type="text"
-                onChange={handleChange}
+                onChange={(e) =>
+                  setFormValue({ ...formValue, city: e.target.value })
+                }
                 placeholder="New York"
                 required
                 name="city"
@@ -193,7 +197,9 @@ const TodoList = () => {
               <input
                 className="w-full p-3 border border-gray-300 rounded-md "
                 type="text"
-                onChange={handleChange}
+                onChange={(e) =>
+                  setFormValue({ ...formValue, state: e.target.value })
+                }
                 placeholder="NY"
                 required
                 name="state"
@@ -207,7 +213,9 @@ const TodoList = () => {
               <input
                 className="w-full p-3 border border-gray-300 rounded-m"
                 type="text"
-                onChange={handleChange}
+                onChange={(e) =>
+                  setFormValue({ ...formValue, code: e.target.value })
+                }
                 placeholder="10001"
                 required
                 name="code"
@@ -219,7 +227,9 @@ const TodoList = () => {
               <input
                 className="w-full p-3 border border-gray-300 rounded-md"
                 type="text"
-                onChange={handleChange}
+                onChange={(e) =>
+                  setFormValue({ ...formValue, country: e.target.value })
+                }
                 placeholder="United States"
                 required
                 name="country"
@@ -232,8 +242,10 @@ const TodoList = () => {
               <label className="text-lg font-bold">Room Password</label>
               <input
                 className="w-full p-3 border border-gray-300 rounded-md"
-                type="text"
-                onChange={handleChange}
+                type="password"
+                onChange={(e) =>
+                  setFormValue({ ...formValue, password: e.target.value })
+                }
                 placeholder="******"
                 required
                 name="password"
@@ -244,12 +256,14 @@ const TodoList = () => {
               <label className="text-lg font-bold">Confirm Password</label>
               <input
                 className="w-full p-3 border border-gray-300 rounded-md"
-                type="text"
-                onChange={handleChange}
+                type="password"
+                onChange={(e) =>
+                  setFormValue({ ...formValue, confirmpassword: e.target.value })
+                }
                 placeholder="******"
                 required
                 name="password"
-                value={formValue.confirmPassword}
+                value={formValue.confirmpassword}
               />
             </div>
           </div>
