@@ -140,12 +140,9 @@ const TodoList = () => {
           <div className="w-full">
             <label className="text-lg font-bold">Street Address</label>
             <input
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border border-gray-300 rounded-md "
               type="text"
-              // onChange={handleChange}
-              onChange={(e) =>
-                setFormValue({ ...formValue, address: e.target.value })
-              }
+              onChange={handleChange}
               placeholder="123 Main Str"
               required
               name="address"
@@ -155,12 +152,9 @@ const TodoList = () => {
           <div className="w-full">
             <label className="text-lg font-bold">Email</label>
             <input
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border border-gray-300 rounded-md"
               type="text"
-              // onChange={handleChange}
-              onChange={(e) =>
-                setFormValue({ ...formValue, address: e.target.value })
-              }
+              onChange={handleChange}
               placeholder="example@gmail.com"
               required
               name="email"
@@ -172,12 +166,9 @@ const TodoList = () => {
               Appartment/Suite (Optional)
             </label>
             <input
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border border-gray-300 rounded-md "
               type="text"
-              // onChange={handleChange}
-              onChange={(e) =>
-                setFormValue({ ...formValue, address: e.target.value })
-              }
+              onChange={handleChange}
               placeholder="Apt 4B"
               required
               name="suite"
@@ -188,12 +179,9 @@ const TodoList = () => {
             <div className="w-full">
               <label className="text-lg font-bold">City</label>
               <input
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 border border-gray-300 rounded-md"
                 type="text"
-                // onChange={handleChange}
-                onChange={(e) =>
-                  setFormValue({ ...formValue, address: e.target.value })
-                }
+                onChange={handleChange}
                 placeholder="New York"
                 required
                 name="city"
@@ -203,12 +191,9 @@ const TodoList = () => {
             <div className="w-full">
               <label className="text-lg font-bold">State</label>
               <input
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 border border-gray-300 rounded-md "
                 type="text"
-                // onChange={handleChange}
-                onChange={(e) =>
-                  setFormValue({ ...formValue, address: e.target.value })
-                }
+                onChange={handleChange}
                 placeholder="NY"
                 required
                 name="state"
@@ -220,12 +205,9 @@ const TodoList = () => {
             <div className="w-full">
               <label className="text-lg font-bold">ZIP Code</label>
               <input
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 border border-gray-300 rounded-m"
                 type="text"
-                // onChange={handleChange}
-                onChange={(e) =>
-                  setFormValue({ ...formValue, address: e.target.value })
-                }
+                onChange={handleChange}
                 placeholder="10001"
                 required
                 name="code"
@@ -235,12 +217,9 @@ const TodoList = () => {
             <div className="w-full">
               <label className="text-lg font-bold">Country</label>
               <input
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 border border-gray-300 rounded-md"
                 type="text"
-                // onChange={handleChange}
-                onChange={(e) =>
-                  setFormValue({ ...formValue, address: e.target.value })
-                }
+                onChange={handleChange}
                 placeholder="United States"
                 required
                 name="country"
@@ -252,12 +231,9 @@ const TodoList = () => {
             <div className="w-full">
               <label className="text-lg font-bold">Room Password</label>
               <input
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 border border-gray-300 rounded-md"
                 type="text"
-                // onChange={handleChange}
-                onChange={(e) =>
-                  setFormValue({ ...formValue, address: e.target.value })
-                }
+                onChange={handleChange}
                 placeholder="******"
                 required
                 name="password"
@@ -267,15 +243,12 @@ const TodoList = () => {
             <div className="w-full">
               <label className="text-lg font-bold">Confirm Password</label>
               <input
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 border border-gray-300 rounded-md"
                 type="text"
-                // onChange={handleChange}
-                onChange={(e) =>
-                  setFormValue({ ...formValue, address: e.target.value })
-                }
+                onChange={handleChange}
                 placeholder="******"
                 required
-                name="confirmpassword"
+                name="password"
                 value={formValue.confirmPassword}
               />
             </div>
