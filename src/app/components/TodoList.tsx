@@ -37,7 +37,6 @@ const TodoList = () => {
   const [newTodo, setNewTodo] = useState(initialTodos);
   const [editInput, setEditInput] = useState<number | null>(null);
 
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -151,7 +150,7 @@ const TodoList = () => {
             <label className="text-lg font-bold">Email</label>
             <input
               className="w-full p-3 border border-gray-300 rounded-md"
-              type="email"
+              type="text"
               onChange={(e) =>
                 setFormValue({ ...formValue, email: e.target.value })
               }
