@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from "react";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const TodoList = () => {
   const initialTodos = [
@@ -36,6 +38,14 @@ const TodoList = () => {
   });
   const [newTodo, setNewTodo] = useState(initialTodos);
   const [editInput, setEditInput] = useState<number | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  //Interface for Icons
+  const icons={
+    visible:<FontAwesomeIcon icon={faEye} />,
+    hidden:<FontAwesomeIcon icon={faEyeSlash} />,
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -239,31 +249,50 @@ const TodoList = () => {
           <div className="flex gap-3">
             <div className="w-full">
               <label className="text-lg font-bold">Room Password</label>
-              <input
-                className="w-full p-3 border border-gray-300 rounded-md"
-                type="password"
-                onChange={(e) =>
-                  setFormValue({ ...formValue, password: e.target.value })
-                }
-                placeholder="******"
-                required
-                name="password"
-                value={formValue.password}
-              />
+              <div className="flex justify-between items-center relative">
+                <input
+                  className="w-full p-3 border border-gray-300 rounded-md"
+                  type={showPassword ? "text" : "password"}
+                  onChange={(e) =>
+                    setFormValue({ ...formValue, password: e.target.value })
+                  }
+                  placeholder="******"
+                  required
+                  name="password"
+                  value={formValue.password}
+                />
+                <div
+                  className="p-2 cursor-pointer ml-[-37px]"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? icons.visible : icons.hidden}
+                </div>
+              </div>
             </div>
             <div className="w-full">
               <label className="text-lg font-bold">Confirm Password</label>
-              <input
-                className="w-full p-3 border border-gray-300 rounded-md"
-                type="password"
-                onChange={(e) =>
-                  setFormValue({ ...formValue, confirmpassword: e.target.value })
-                }
-                placeholder="******"
-                required
-                name="password"
-                value={formValue.confirmpassword}
-              />
+              <div className="flex justify-center items-center relative">
+                <input
+                  className="w-full p-3 border border-gray-300 rounded-md"
+                  type={showConfirmPassword ? "text" : "password"}
+                  onChange={(e) =>
+                    setFormValue({
+                      ...formValue,
+                      confirmpassword: e.target.value,
+                    })
+                  }
+                  placeholder="******"
+                  required
+                  name="password"
+                  value={formValue.confirmpassword}
+                />
+                <div
+                  className="p-2 ml-[-37px] cursor-pointer"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                  {showConfirmPassword ? icons.visible : icons.hidden}
+                </div>
+              </div>
             </div>
           </div>
           <button
